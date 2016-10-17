@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class PlayActivity extends Activity {
     private static final int MAX_FACES = 10;
     private Bitmap background_image;
@@ -23,10 +26,18 @@ public class PlayActivity extends Activity {
     private PointF tmp_point = new PointF();
     private Paint tmp_paint = new Paint();
     private ImageView image;
+    private ArrayList<Integer> listeImagesl;
+
+    private int vies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vies = 3;
+        listeImagesl = new ArrayList<>();
+        for(int i = 1; i < 18; i++) {
+            listeImagesl.add(getResources().getIdentifier("image" + String.valueOf(i) + ".jpg", "drawable", getPackageName()));
+        }
 
         setContentView(R.layout.show_image_activity);
         Button backButton = (Button)findViewById(R.id.button1);
@@ -73,6 +84,12 @@ public class PlayActivity extends Activity {
 
     public void closeActivity(View view) {
         finish();
+    }
+
+    public void verifierVies() {
+        if (vies <= 0) {
+            finish();
+        }
     }
 }
 
